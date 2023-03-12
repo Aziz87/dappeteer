@@ -5,6 +5,7 @@ import {
   NodeFor,
   Page,
   WaitForOptions,
+  Protocol
 } from "puppeteer";
 import { DappeteerBrowser } from "../browser";
 import { DappeteerElementHandle } from "../element";
@@ -103,6 +104,10 @@ export class DPupeteerPage implements DappeteerPage<Page> {
     return this.page.setViewport(opts);
   }
 
+  async setCookie(...cookies:Protocol.Network.CookieParam[]):Promise<void>{
+    await this.page.setCookie(cookies);
+  }
+  
   waitForResponse(
     urlOrPredicate: string | ((res: Response) => boolean | Promise<boolean>),
     options?: { timeout?: number }
